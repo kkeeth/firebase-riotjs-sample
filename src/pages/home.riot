@@ -5,17 +5,18 @@
   <hr />
   <input
     type="text"
+    placeholder="input name"
     value={ state.name }
     onchange={ setName }
   />
   <input
     type="text"
+    placeholder="input text"
     value={ state.text }
     onchange={ setText }
   />
   <button onclick={ handleClick }>
-    {" "}
-    push{" "}
+    push
   </button>
 
   <script>
@@ -23,8 +24,8 @@
 
     export default {
       state: {
-        name: 'default',
-        text: 'text',
+        name: '',
+        text: '',
         messages: []
       },
       onBeforeMount(props, state) {
@@ -60,6 +61,10 @@
         pushMessage({
           name: this.state.name,
           text: this.state.text
+        })
+        this.update({
+          name: '',
+          text: ''
         })
       }
     }
