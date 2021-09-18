@@ -61,3 +61,8 @@ generated
 !.gitmodules
 !.travis.yml
 .env
+
+# firebase
+firebase.json
+.firebaserc
+.firebase
