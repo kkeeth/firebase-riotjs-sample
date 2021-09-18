@@ -63,6 +63,5 @@ generated
 .env
 
 # firebase
-firebase.json
 .firebaserc
 .firebase
