@@ -1,0 +1,67 @@
+<home>
+  <div each={ (message, key) in state.messages } key={ key }>
+    { message.name }:{ message.text }
+  </div>
+  <hr />
+  <input
+    type="text"
+    value={ state.name }
+    onchange={ setName }
+  />
+  <input
+    type="text"
+    value={ state.text }
+    onchange={ setText }
+  />
+  <button onclick={ handleClick }>
+    {" "}
+    push{" "}
+  </button>
+
+  <script>
+    import { messagesRef, pushMessage } from "../firebase"
+
+    export default {
+      state: {
+        name: 'default',
+        text: 'text',
+        messages: []
+      },
+      onBeforeMount(props, state) {
+        messagesRef
+          .orderByKey()
+          .limitToLast(10)
+          .on("value", (snapshot) => {
+            const messages = snapshot.val()
+
+            if (messages === null) return
+
+            const entries = Object.entries(messages)
+            const newMessages = entries.map((data) => {
+              const [key, message] = data
+              return { key, ...message }
+            })
+            this.update({
+              messages: newMessages
+            })
+        })
+      },
+      setName(e) {
+        this.update({
+          name: e.target.value
+        })
+      },
+      setText(e) {
+        this.update({
+          text: e.target.value
+        })
+      },
+      handleClick() {
+        pushMessage({
+          name: this.state.name,
+          text: this.state.text
+        })
+      }
+    }
+  </script>
+</home>
