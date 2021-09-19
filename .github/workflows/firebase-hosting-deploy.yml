@@ -22,7 +22,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.npm-cache.outputs.dir }}
-          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-npm-
       - name: Install Dependencies
